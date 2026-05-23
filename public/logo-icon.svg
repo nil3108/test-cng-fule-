@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210">
+  <defs>
+    <filter id="goo" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -10"/>
+    </filter>
+    <mask id="hole">
+      <rect width="200" height="210" fill="white"/>
+      <!-- Horseshoe inner hole: arch cap + two legs to bottom -->
+      <path d="M 79 210 L 79 140 A 21 21 0 0 1 121 140 L 121 210 Z" fill="black"/>
+    </mask>
+  </defs>
+
+  <g mask="url(#hole)">
+    <g filter="url(#goo)">
+      <!-- Top blob -->
+      <circle cx="100" cy="37"  r="34" fill="#E10600"/>
+      <!-- Bottom-left blob -->
+      <circle cx="32"  cy="157" r="34" fill="#E10600"/>
+      <!-- Bottom-right blob -->
+      <circle cx="168" cy="157" r="34" fill="#E10600"/>
+
+      <!-- Arch bridge — provides the horseshoe ring material in lower center -->
+      <circle cx="100" cy="150" r="30" fill="#E10600"/>
+
+      <!-- Arms connecting top blob to Y-junction -->
+      <line x1="100" y1="37"  x2="100" y2="108"
+            stroke="#E10600" stroke-width="20" stroke-linecap="round"/>
+      <!-- Arms from Y-junction to lower blobs -->
+      <line x1="100" y1="108" x2="32"  y2="157"
+            stroke="#E10600" stroke-width="20" stroke-linecap="round"/>
+      <line x1="100" y1="108" x2="168" y2="157"
+            stroke="#E10600" stroke-width="20" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

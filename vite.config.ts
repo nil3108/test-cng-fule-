@@ -1,0 +1,47 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { VitePWA } from 'vite-plugin-pwa'
+
+const BASE = '/test-cng-fule-/'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss(), VitePWA({
+    registerType: 'autoUpdate',
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,jpg,jpeg,png,svg,ico,json}'],
+      navigateFallback: BASE + 'index.html',
+      cleanupOutdatedCaches: true,
+      skipWaiting: true,
+      clientsClaim: true,
+    },
+    manifest: {
+      name: 'Techinnovate Fleet CNG',
+      short_name: 'CNG Tracker',
+      description: 'Fleet CNG Monitoring System',
+      start_url: BASE,
+      scope: BASE,
+      display: 'standalone',
+      background_color: '#F5F6F8',
+      theme_color: '#E10600',
+      orientation: 'portrait-primary',
+      categories: ['business', 'utilities'],
+      icons: [
+        { src: BASE + 'logo.jpg', sizes: '192x192', type: 'image/jpeg', purpose: 'any' },
+        { src: BASE + 'logo.jpg', sizes: '512x512', type: 'image/jpeg', purpose: 'any' },
+      ],
+    },
+  })],
+  base: BASE,
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
+    },
+  },
+})
